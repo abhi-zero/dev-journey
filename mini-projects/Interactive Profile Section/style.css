@@ -251,3 +251,19 @@ a:hover .linkedin{
  }
  
 }
+@media (min-height: 660px) and (max-width : 768px){
+    .card{
+        top:52%
+    }
+}
+
+@media (min-height: 830px) and (max-width : 768px){
+    .card{
+        top:60%
+    }
+}
+@media (min-height: 910px) and (max-width : 768px){
+    .card{
+        top:63%
+    }
+}
