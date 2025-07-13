@@ -1,0 +1,253 @@
+:root{
+    --body-bg: white;
+    --card-bd:whitesmoke;
+    --social-icon :black;
+    --name-color: black;
+    --bio-color: rgb(58, 54, 54);
+    --insight-color: black;
+    --button-border-color:black;
+    --button-hover-bg: black;
+    --button-hover-color: white;
+    --shodow-color: black;
+    --project-color: black;
+    --github-color: white;
+}
+
+.darkmode{
+     --body-bg: rgb(56, 55, 55);
+    --card-bd:black;
+    --social-icon :white;
+    --name-color: rgb(255, 253, 253);
+    --bio-color: grey;
+    --insight-color: grey;
+    --button-color:rgb(255, 255, 255);
+    --button-border-color:rgb(255, 255, 255);
+    --button-hover-bg: rgb(255, 249, 249);
+    --button-hover-color: rgb(13, 13, 13);
+    --shodow-color: rgb(35, 34, 34);
+    --project-color: rgb(158, 157, 157);
+     --github-color: black;
+}
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+a{
+    color: var(--social-icon);
+    text-decoration: none;
+}
+
+img{
+    width: 100;
+}
+
+body{
+    transition: all .3s ease-in-out;
+}
+
+.toggle-theme{
+    background-color: transparent;
+    font-size: 28px;
+    position: absolute;
+    top: 1%;
+    left: 2%;
+    border: none;
+    transition: all .3s ease-in-out;
+    cursor: pointer;
+}
+
+.ri-sun-fill{
+    color: white;
+}
+.toggle-theme:hover{
+  transform: rotatez(45deg);
+}
+
+.toggle-theme i:last-child{
+    display: none;
+}
+
+.darkmode .toggle-theme i:first-child{
+    display: none;
+}
+.darkmode .toggle-theme i:last-child{
+    display: block;
+}
+
+
+
+
+main{
+    background-image: url(./profilebw.jpg);
+    background-position: top;
+    background-size: cover;
+    height: 100vh;
+    position: relative;
+    font-family: 'Roboto';
+    overflow: hidden;
+}
+.card{
+    position: absolute;
+    top: 55%;
+    height: 100%;
+    background-color: var(--card-bd);
+    border-radius: 20px 20px 0 0;
+    padding: 30px;
+    width: 100%;
+    transition: all .3s ease-in-out;
+}
+
+.card.up{
+    top: 20%;
+}
+
+.info{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-self: center;
+    gap: 15px;
+    line-break: balance;
+    max-width: 500px;
+    overflow: hidden;
+}
+
+.info .name{
+    font-family: 'Lobster';
+    font-weight: 500;
+    letter-spacing: 1px;
+    color:var(--name-color);
+}
+.info .social-links a{
+    font-size: 24px;
+   
+}
+.github, .instagram, .linkedin{
+ transition: all .3s ease-in-out;
+}
+
+
+a:hover .github ,a:hover .instagram, a:hover .linkedin{
+    background-color: var(--social-icon);
+    border-radius: 20px;
+    padding: 5px;
+}
+a:hover .github {
+    color: var(--github-color);
+}
+
+a:hover .instagram{
+    color: purple;
+}
+
+a:hover .linkedin{
+    color: rgb(21, 80, 218);
+}
+
+.bio{
+    color: var(--bio-color);
+}
+
+.insights{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    gap: 30px;
+    color: var(--insight-color);
+}
+
+.insights .number h3{
+    font-size: 28px;
+    font-weight: 500;
+}
+
+.insights .title p{
+    font-family: "lobster";
+}
+
+.see-more{
+    background-color: transparent;
+    color: var(--button-color);
+    border-radius: 25px;
+    border:2px solid var(--button-border-color);
+    padding: 10px 20px;
+    line-height: 1;
+    transition:  all .3s ease-in-out;
+}
+
+.see-more:hover{
+    background-color: var(--button-hover-bg);
+    color: var(--button-hover-color);
+}
+
+.project-title .title{
+    font-size: 16px;
+    font-family: 'lobster';
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.projects{
+    max-height: 230px ;
+    display: flex;
+    gap: 10px;
+    flex-wrap:wrap;
+    justify-content: center;
+    overflow-y: scroll;
+}
+
+
+.project{
+    background-color: var(--project-color);
+    width: 150px;
+    height: 100px;
+    border-radius: 10px;  
+}
+
+@media (min-width : 768px) {
+    main{
+    background-image: none;
+    background-color: var(--body-bg);
+    height: 100vh;
+    position: relative;
+    font-family: 'Roboto';
+   }
+   .toggle-theme {
+    top: 1%;
+    left: 95%;
+    transition: all .3s ease-in-out;
+   }
+
+ .card{
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 700px;
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    border-radius: 25px;
+    padding: 0;
+    height: 370px;
+    overflow: hidden;
+    filter: drop-shadow(0px 15px 20px var(--shodow-color));
+ }
+
+ .card .image{
+    background-image: url(./profilebw.jpg);
+    background-position: top;
+    background-size: cover;
+ }
+
+ .info{
+    padding: 50px 30px;
+    height: 100%;
+ }
+ 
+ .projects{
+    height: 100%;
+ }
+ 
+}
