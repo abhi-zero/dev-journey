@@ -33,6 +33,7 @@ h6 {
 body {
   font-family: "Roboto";
 }
+
 .nav-mobile {
   display: none;
 }
@@ -52,13 +53,20 @@ nav .logo {
   gap: 20px;
 }
 
-.nav-desktop div a h3 {
+.nav-link{
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.nav-desktop div .nav-link h3 {
   font-weight: 500;
   display: block;
   position: relative;
   padding: 0 5px;
 }
-.nav-desktop div a h3::after {
+.nav-desktop div .nav-link h3::after {
   content: "";
   background-color: var(--nav-link-hover-color);
   height: 0%;
@@ -69,8 +77,12 @@ nav .logo {
   transition: all 0.3s ease-in-out;
   border-radius: 4px;
 }
-.nav-desktop div a:hover h3::after {
+.nav-desktop div .nav-link:hover h3::after {
   height: 100%;
+}
+
+button.nav-link{
+    width:fit-content ;
 }
 
 .nav-desktop .right-side {
@@ -87,7 +99,6 @@ main {
 main .left-side {
   position: sticky;
   top: 20px;
-  /* height: 100%; */
   align-self: start;
 }
 main .left-side-content {
@@ -162,6 +173,59 @@ main .right-side .faqs .faq:nth-child(2) {
   display: block;
 }
 
+/* ========= Modal Styles ========= */
+dialog:-internal-dialog-in-top-layer {
+    max-width: 100%;
+    max-height: 100%;
+}
+.modal-overlay {
+  /* position: fixed; */
+  background-color: rgba(0, 0, 0, 0.5);
+  border: none;
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999;
+  backdrop-filter: blur(2px);
+}
+
+.modal-content {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 40px 30px;
+  border-radius: 16px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+}
+
+.close-modal {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #333;
+  background: transparent;
+  border: none;
+}
+
+/* Profile inside modal */
+.profile-card .profile-pic {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 15px;
+}
+
+
+
+
 @media(max-width: 1040px){
    
     main .left-side h1 {
@@ -193,7 +257,7 @@ main .left-side p {
 
   .nav-mobile .nav-links {
     position: absolute;
-    right: -20%;
+    right: -50%;
 
     transition: all 0.3s ease-in-out;
   }
@@ -226,7 +290,7 @@ main .left-side p {
     background-color: rgba(14, 14, 14, 0.489);
   }
 
-  .nav-links a {
+  .nav-links nav-link{
     color: rgb(244, 225, 189);
   }
 
