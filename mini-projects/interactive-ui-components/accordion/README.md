@@ -16,7 +16,7 @@ This project showcases two essential UI components built with HTML, CSS, and Jav
 
 ## 🖥️ Demo
 
-> **Coming soon** – deployed on Netlify or GitHub Pages.
+[Live site link](https://faq-modalpage.netlify.app/)
 
 To preview locally:
 
