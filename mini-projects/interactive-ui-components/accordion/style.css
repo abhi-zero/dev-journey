@@ -1,0 +1,260 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+:root {
+  interpolate-size: allow-keywords;
+  --nav-link-hover-color: grey;
+  --faq-border-color: black;
+}
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+img {
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Quicksand";
+}
+body {
+  font-family: "Roboto";
+}
+.nav-mobile {
+  display: none;
+}
+.nav-desktop {
+  display: flex;
+  justify-content: space-between;
+  padding: 30px 50px;
+}
+
+nav .logo {
+  width: 100px;
+}
+
+.nav-desktop div {
+  width: 200px;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-desktop div a h3 {
+  font-weight: 500;
+  display: block;
+  position: relative;
+  padding: 0 5px;
+}
+.nav-desktop div a h3::after {
+  content: "";
+  background-color: var(--nav-link-hover-color);
+  height: 0%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  z-index: -1;
+  transition: all 0.3s ease-in-out;
+  border-radius: 4px;
+}
+.nav-desktop div a:hover h3::after {
+  height: 100%;
+}
+
+.nav-desktop .right-side {
+  justify-content: end;
+}
+
+main {
+  display: grid;
+  grid-template-columns: 0.65fr 1.35fr;
+  gap: 50px;
+  padding-top: 100px;
+}
+
+main .left-side {
+  position: sticky;
+  top: 20px;
+  /* height: 100%; */
+  align-self: start;
+}
+main .left-side-content {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  gap: 20px;
+}
+
+main .left-side h1 {
+  width: 300px;
+  text-align: left;
+  font-weight: 400;
+  font-size: 44px;
+}
+
+main .left-side p {
+  width: 300px;
+}
+
+main .right-side {
+  padding-top: 30px;
+  padding-right: 30px;
+}
+main .right-side .faqs h4 {
+  padding-bottom: 20px;
+}
+main .right-side .faqs .faq {
+  padding-block: 20px;
+  max-width: 800px;
+  border-bottom: 1.5px solid var(--faq-border-color);
+  cursor: pointer;
+}
+
+main .right-side .faqs .faq:nth-child(2) {
+  border-top: 1.5px solid var(--faq-border-color);
+}
+
+.faq .question {
+  display: flex;
+  justify-content: space-between;
+}
+
+.faq p {
+  max-width: 80%;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+.accord-span {
+  border: none;
+  background-color: transparent;
+  font-size: 20px;
+}
+.accord-span i:last-child {
+  display: none;
+}
+
+.accord-open.faq p {
+  max-height: 100%;
+  padding-top: 10px;
+  overflow: hidden;
+  opacity: 1;
+}
+
+.accord-open .accord-span i:first-child {
+  display: none;
+}
+.accord-open .accord-span i:last-child {
+  display: block;
+}
+
+@media(max-width: 1040px){
+   
+    main .left-side h1 {
+ padding-left: 30px;
+}
+
+main .left-side p {
+  padding-left: 30px;
+}
+}
+
+@media (max-width: 768px) {
+  .nav-desktop {
+    display: none;
+  }
+  .app {
+    height: 100vh;
+    overflow-x: hidden;
+  }
+  .nav-mobile {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: top;
+    padding: 20px 30px;
+    position: relative;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .nav-mobile .nav-links {
+    position: absolute;
+    right: -20%;
+
+    transition: all 0.3s ease-in-out;
+  }
+  .menu-btn {
+    border-radius: 50%;
+    border: none;
+    font-size: 20px;
+  }
+
+  .menu-btn i:last-child {
+    display: none;
+  }
+
+  .open .menu-btn i:first-child {
+    display: none;
+  }
+  .open .menu-btn i:last-child {
+    display: block;
+  }
+
+  .open .nav-links {
+    height: fit-content;
+    padding: 30px;
+    position: absolute;
+    right: 10%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+    background-color: rgba(14, 14, 14, 0.489);
+  }
+
+  .nav-links a {
+    color: rgb(244, 225, 189);
+  }
+
+  main {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-row: auto auto;
+  gap: 50px;
+  padding-top: 100px;
+  padding-inline: 30px;
+}
+main .left-side {
+  position: static;
+}
+
+main .left-side-content {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 20px;
+}
+
+main .left-side h1,main .left-side p {
+  padding-left: 0px;
+
+}
+
+main .right-side {
+  padding-right: 0px;
+}
+}
