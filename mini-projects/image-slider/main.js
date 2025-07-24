@@ -88,6 +88,11 @@ function loadCards() {
     if (index >= locations.length) {
       index = 0;
     }
+    if (index < -1) {
+      index = 0;
+      return;
+    }
+
 
     cardContainer.style.transition = "transform 0.5s ease";
     cardContainer.style.transform = `translateX(${move}px)`;
@@ -109,7 +114,7 @@ function loadCards() {
     count = index;
   }
 
-  setInterval(() => {
+  let cardsAnimation = setInterval(() => {
     move -= cardWidth - gap;
 
     if (Math.abs(`${move}`) > (cardWidth + gap) * totalCards + halfWindowWide) {
@@ -131,12 +136,17 @@ function loadCards() {
     if(count <= 0) return;
     move += (cardWidth - gap);
     --count;
-    updateWindow(count);
+    updateWindow(count - 1);
+    clearInterval(cardsAnimation);
+    console.log(count);
+    
   })
   rightArrow.addEventListener('click', ()=>{
     if(count > locations.length) return;
-    move -= (cardWidth + gap);
-    count++;
+    move = 0;
+    move -= (cardWidth);
+    ++count;
     updateWindow(count);
+    console.log(count);
   })
 }
