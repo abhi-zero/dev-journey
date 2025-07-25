@@ -82,6 +82,12 @@ image-slider/
 
 ---
 
+## 🖼️ Inspiration
+
+This project was inspired by a design found on [Pinterest](https://in.pinterest.com/pin/663014376433312582/). Credit to the original creator for the visual concept.
+
+---
+
 ## 📜 License
 
 MIT © 2025 Abhinandan Bhatti
