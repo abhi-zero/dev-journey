@@ -34,7 +34,6 @@ function createCard(locationData) {
 
   return card;
 }
-
 document.addEventListener("DOMContentLoaded", () => {
   fetch(url)
     .then((response) => {
@@ -44,7 +43,6 @@ document.addEventListener("DOMContentLoaded", () => {
     .then((data) => {
       data.map((elem) => {
         locations.push(elem);
-        console.log(locations);
       });
       loadCards();
     })
@@ -53,100 +51,116 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-function loadCards() {
-  if (locations.length == 0) return;
-
-  locations.forEach((location) => {
-    const card = createCard(location);
-    cardContainer.appendChild(card);
-  });
-  let count = 0;
-  let move = 0;
-
-  const cardWidth = 240; // example: width of a card
-  const gap = 30; // example: gap between cards
-  const totalCards = cardContainer.children.length; // replace with your actual ID/class
-  const halfWindowWide = 240 - window.innerWidth * 0.5;
-  // background window elements
+  // DOM references
   const bgImage = document.querySelector("main");
   const bgCityLocation = document.querySelector(".city");
   const bgCountryLocation = document.querySelector(".country");
   const bgTitle = document.querySelector(".title");
   const bgDescription = document.querySelector(".description");
   const bgDiscoverBtn = document.querySelector(".map");
-
-  // background window navigation elements
   const progresBar = document.querySelector(".inner-line");
   const imgNumber = document.querySelector(".img-num");
-  const leftArrow = document.querySelector('.left-btn');
-  const rightArrow = document.querySelector('.right-btn');
+  const leftArrow = document.querySelector(".left-btn");
+  const rightArrow = document.querySelector(".right-btn");
+
+  const cardWidth = 240;
+  const gap = 30;
+  const step = cardWidth - gap;
+
+  let move = 0;
+  let count = 0;
 
   function updateWindow(index) {
-    let calcProgress;
-    let imgNumberValue;
-    // Safety check
-    if (index >= locations.length) {
-      index = 0;
-    }
+    if (index >= locations.length) index = 0;
     if (index < -1) {
       index = 0;
-      return;
+
     }
 
-
+    console.log("count", count);
+    
+    // Smooth move transition
     cardContainer.style.transition = "transform 0.5s ease";
+    if(move > 0){
+      move = 0;
+      return;
+    }
     cardContainer.style.transform = `translateX(${move}px)`;
-    bgImage.style.backgroundImage = `url(${locations[index].img})`;
-    bgTitle.textContent = locations[index].name;
-    bgCityLocation.textContent = locations[index].location[0];
-    bgCountryLocation.textContent = locations[index].location[0];
-    bgDescription.textContent = locations[index].description;
-    bgDiscoverBtn.href = locations[index].map;
 
-    // background window navigation elements
-    let calcProgressValue = index + 1;
-    calcProgress = (calcProgressValue / locations.length) * 100;
-    imgNumberValue = index < 10 ? `0${++index}` : ++index;
-    progresBar.style.width = `${calcProgress}%`;
 
-    imgNumber.textContent = imgNumberValue;
+    console.log(index);
+    
+    // Background content
+    const loc = locations[index];
+    bgImage.style.backgroundImage = `url(${loc.img})`;
+    bgTitle.textContent = loc.name;
+    bgCityLocation.textContent = loc.location[0];
+    bgCountryLocation.textContent = loc.location[1] || loc.location[0];
+    bgDescription.textContent = loc.description;
+    bgDiscoverBtn.href = loc.map;
 
-    count = index;
+    // Progress and numbering
+    const progress = ((index + 1) / locations.length) * 100;
+    progresBar.style.width = `${progress}%`;
+    imgNumber.textContent = index + 1 < 10 ? `0${index + 1}` : index + 1;
+
   }
 
-  let cardsAnimation = setInterval(() => {
-    move -= cardWidth - gap;
+function loadCards() {
+  if (locations.length === 0) return;
 
-    if (Math.abs(`${move}`) > (cardWidth + gap) * totalCards + halfWindowWide) {
-      move = 0;
-      cardContainer.style.transition = "none"; // remove transition for instant reset
-      cardContainer.style.transform = `translateX(0px)`;
-      return;
-    }
+  // Add cards to container
+  locations.forEach((location) => {
+    const card = createCard(location);
+    cardContainer.appendChild(card);
+  });
 
-    if (count > locations.length) {
-      count = 0;
-    }
-    // update window
-    updateWindow(count);
-    // count++;
-  }, 6000);
 
-  leftArrow.addEventListener('click', ()=>{
-    if(count <= 0) return;
-    move += (cardWidth - gap);
-    --count;
-    updateWindow(count - 1);
-    clearInterval(cardsAnimation);
-    console.log(count);
-    
-  })
-  rightArrow.addEventListener('click', ()=>{
-    if(count > locations.length) return;
-    move = 0;
-    move -= (cardWidth);
-    ++count;
-    updateWindow(count);
-    console.log(count);
-  })
 }
+// Auto scroll
+const cardsAnimation = setInterval(() => {
+  move -= step;
+  
+  if (count >= locations.length) {
+    move = 0;
+    count = 0;
+    cardContainer.style.transition = "none";
+    cardContainer.style.transform = `translateX(0px)`;
+    // Wait a frame, then resume smooth transition
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        cardContainer.style.transition = "transform 0.5s ease";
+        updateWindow(count);
+      });
+    });
+  } else {
+    updateWindow(count);
+  }
+  count++;
+}, 6000);
+
+// Arrow Controls
+rightArrow.addEventListener("click", () => {
+  if (count >= locations.length) {
+    count = 0;
+    move = 0;
+  } else {
+    move -= step;
+  }
+  updateWindow(count);
+  count++;
+  clearInterval(cardsAnimation);
+});
+
+leftArrow.addEventListener("click", () => {
+  count--;
+  if (count < 0) {
+    count = 0;
+  };
+  let value = count - 1 
+  move += step;
+  updateWindow(value);
+  console.log(value);
+  
+  clearInterval(cardsAnimation);
+});
