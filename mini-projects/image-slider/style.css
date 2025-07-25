@@ -28,6 +28,7 @@
     --font-family2: 'Bebas Neue';
 
     /* colors */
+    --bg-font-color: rgb(255, 255, 254);
     --logo-color:white;
     --link-color: white;
     --nav-hover-color: orange;
@@ -69,6 +70,8 @@ button{
     justify-content: space-between;
     align-items: center;
     position: relative;
+    backdrop-filter: blur(5px);
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 .logo-text{
@@ -173,11 +176,13 @@ main{
 .location{
     font-size: 20px;
     font-weight: 400;
+    color: var(--bg-font-color);
 }
 
 .title{
     font-size: 76px;
     font-family: var(--font-family2);
+    color: var(--bg-font-color);
     letter-spacing: 2px;
     font-weight: 500;
     width: 300px;
@@ -186,6 +191,7 @@ main{
 .description{
     font-size: 16px;
     letter-spacing: .1px;
+    color: var(--bg-font-color);
 }
 
 .bookmark-map{
@@ -305,7 +311,7 @@ main{
 }
 
 .inner-line{
-    width: 50%;
+    width: 0%;
     height: 100%;
     background: var(--indicator-gradient);
     transition: all .3s ease-in;
