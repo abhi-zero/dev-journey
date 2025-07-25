@@ -51,60 +51,57 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-  // DOM references
-  const bgImage = document.querySelector("main");
-  const bgCityLocation = document.querySelector(".city");
-  const bgCountryLocation = document.querySelector(".country");
-  const bgTitle = document.querySelector(".title");
-  const bgDescription = document.querySelector(".description");
-  const bgDiscoverBtn = document.querySelector(".map");
-  const progresBar = document.querySelector(".inner-line");
-  const imgNumber = document.querySelector(".img-num");
-  const leftArrow = document.querySelector(".left-btn");
-  const rightArrow = document.querySelector(".right-btn");
+// DOM references
+const bgImage = document.querySelector("main");
+const bgCityLocation = document.querySelector(".city");
+const bgCountryLocation = document.querySelector(".country");
+const bgTitle = document.querySelector(".title");
+const bgDescription = document.querySelector(".description");
+const bgDiscoverBtn = document.querySelector(".map");
+const progresBar = document.querySelector(".inner-line");
+const imgNumber = document.querySelector(".img-num-elem");
+const leftArrow = document.querySelector(".left-btn");
+const rightArrow = document.querySelector(".right-btn");
 
-  const cardWidth = 240;
-  const gap = 30;
-  const step = cardWidth - gap;
+const cardWidth = 240;
+const gap = 30;
+const step = cardWidth - gap;
 
-  let move = 0;
-  let count = 0;
+let move = 0;
+let count = 0;
 
-  function updateWindow(index) {
-    if (index >= locations.length) index = 0;
-    if (index < -1) {
-      index = 0;
-
-    }
-
-    console.log("count", count);
-    
-    // Smooth move transition
-    cardContainer.style.transition = "transform 0.5s ease";
-    if(move > 0){
-      move = 0;
-      return;
-    }
-    cardContainer.style.transform = `translateX(${move}px)`;
-
-
-    console.log(index);
-    
-    // Background content
-    const loc = locations[index];
-    bgImage.style.backgroundImage = `url(${loc.img})`;
-    bgTitle.textContent = loc.name;
-    bgCityLocation.textContent = loc.location[0];
-    bgCountryLocation.textContent = loc.location[1] || loc.location[0];
-    bgDescription.textContent = loc.description;
-    bgDiscoverBtn.href = loc.map;
-
-    // Progress and numbering
-    const progress = ((index + 1) / locations.length) * 100;
-    progresBar.style.width = `${progress}%`;
-    imgNumber.textContent = index + 1 < 10 ? `0${index + 1}` : index + 1;
-
+function updateWindow(index) {
+  if (index >= locations.length) index = 0;
+  if (index < -1) {
+    index = 0;
   }
+
+  console.log("count", count);
+
+  // Smooth move transition
+  cardContainer.style.transition = "transform 0.5s ease";
+  if (move > 0) {
+    move = 0;
+    return;
+  }
+  cardContainer.style.transform = `translateX(${move}px)`;
+
+  console.log(index);
+
+  // Background content
+  const loc = locations[index];
+  bgImage.style.backgroundImage = `url(${loc.img})`;
+  bgTitle.textContent = loc.name;
+  bgCityLocation.textContent = loc.location[0];
+  bgCountryLocation.textContent = loc.location[1] || loc.location[0];
+  bgDescription.textContent = loc.description;
+  bgDiscoverBtn.href = loc.map;
+
+  // Progress and numbering
+  const progress = ((index + 1) / locations.length) * 100;
+  progresBar.style.width = `${progress}%`;
+  imgNumber.textContent = index + 1 < 10 ? `0${index + 1}` : index + 1;
+}
 
 function loadCards() {
   if (locations.length === 0) return;
@@ -114,16 +111,14 @@ function loadCards() {
     const card = createCard(location);
     cardContainer.appendChild(card);
   });
-
-
 }
-// Auto scroll
-const cardsAnimation = setInterval(() => {
+
+function animate(){
   move -= step;
-  
+
   if (count >= locations.length) {
     move = 0;
-    count = 0;
+    count = -1;
     cardContainer.style.transition = "none";
     cardContainer.style.transform = `translateX(0px)`;
     // Wait a frame, then resume smooth transition
@@ -137,7 +132,16 @@ const cardsAnimation = setInterval(() => {
     updateWindow(count);
   }
   count++;
-}, 6000);
+}
+
+function resetAnimation() {
+  clearInterval(cardsAnimation);
+  setTimeout(() => {
+  cardsAnimation = setInterval(animate, 6000);
+}, 3000); // Delay to ensure initial load is smooth
+}
+// Auto scroll
+let cardsAnimation = setInterval(animate, 6000);
 
 // Arrow Controls
 rightArrow.addEventListener("click", () => {
@@ -149,18 +153,20 @@ rightArrow.addEventListener("click", () => {
   }
   updateWindow(count);
   count++;
-  clearInterval(cardsAnimation);
+ resetAnimation()
 });
 
 leftArrow.addEventListener("click", () => {
   count--;
   if (count < 0) {
     count = 0;
-  };
-  let value = count - 1 
+  }
+  let value = count - 1;
   move += step;
   updateWindow(value);
-  console.log(value);
-  
-  clearInterval(cardsAnimation);
+  resetAnimation()
 });
+
+
+
+
