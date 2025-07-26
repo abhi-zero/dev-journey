@@ -189,6 +189,7 @@ a {
   font-size: var(--Font-size-300);
   font-weight: 700;
   color: var(--Price-color);
+  transition: all 0.3s ease-in-out;
 }
 .services-details {
   width: 100%;
