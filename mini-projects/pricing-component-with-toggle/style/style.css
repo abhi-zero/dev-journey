@@ -1,0 +1,294 @@
+:root {
+  /* colors */
+  --white: hsl(0, 0%, 100%);
+  --Blue-50: hsl(240, 78%, 98%);
+  --Blue-100: hsl(237, 73%, 79%);
+  --Blue-200: hsl(238, 63%, 64%);
+  --Gray-650: hsl(233, 13%, 49%);
+  --Gray-700: hsl(232, 13%, 33%);
+  --Gray-800: hsl(230, 14%, 25%);
+
+  --Linear-gradient1: linear-gradient(
+    to right,
+    var(--Blue-100),
+    var(--Blue-200)
+  );
+  --Linear-gradient2: linear-gradient(
+    to right,
+    var(--Blue-100),
+    var(--Blue-100)
+  );
+  --Linear-gradient3: linear-gradient(
+    to bottom right,
+    var(--Blue-100),
+    var(--Blue-200));
+
+  /* semantic colors */
+  --Tilte-color: var(--Gray-700);
+  --Toggle-color: var(--Blue-50);
+  --Toggle-hover-color: var(--Linear-gradient2);
+  --Toggle-gradient: var(--Linear-gradient1);
+  --Billing-option-color: var(--Gray-650);
+  --Card-bg-color: var(--white);
+  --Card-category-color: var(--Gray-700);
+  --Price-color: var(--Gray-800);
+  --Card-list-color: var(--Gray-700);
+  --Card-list-border-color: var(--Gray-650);
+  --Button-bg-gradient: var(--Linear-gradient1);
+  --Button-border-color: var(--Gray-650);
+  --Card-bg-special-color: var(--Linear-gradient3);
+  --Card-category-special-color: var(--white);
+  --Price-special-color: var(--white);
+  --Card-list-special-color: var(--white);
+  --Card-list-border-special-color: var(--white);
+  --Button-special-color: var(--Blue-200);
+
+  /* font size */
+  --Font-size-80: 0.75rem;
+  --Font-size-100: 1rem;
+  --Font-size-200: 2rem;
+  --Font-size-300: 3rem;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Montserrat", sans-serif;
+  background-color: #f0f0f0;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+ul {
+  list-style: none;
+}
+li {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  list-style-position: outside;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.top-bg-img {
+  position: absolute;
+  top: -10%;
+  right: 0%;
+  z-index: -1;
+  background-size: cover;
+}
+.bottom-img {
+  position: absolute;
+  bottom: 0%;
+  left: 0%;
+  z-index: -1;
+}
+
+#page {
+  width: 100%;
+  height: calc(100vh - 70px);
+  min-width: 350px;
+}
+
+#page header {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-top: 70px;
+  align-items: center;
+}
+#page header h1 {
+  font-size: var(--Font-size-200);
+  color: var(--Tilte-color);
+}
+
+.billing-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.billing-option {
+  font-weight: 700;
+  color: var(--Billing-option-color);
+}
+
+.toggle-label {
+  display: inline-block;
+  height: 25px;
+  background: var(--Toggle-gradient);
+  width: 50px;
+  border-radius: 25px;
+  position: relative;
+  transition: 0.3s ease-in-out;
+  cursor: pointer;
+}
+.toggle-label:hover {
+  background: var(--Toggle-hover-color);
+}
+
+.toggle-label::before {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-53%) translateX(0%);
+  margin-inline: 3px;
+  content: "";
+  height: 20px;
+  width: 20px;
+  background-color: var(--Blue-50);
+  border-radius: 50%;
+  transition: 0.3s ease-in-out;
+}
+
+#billing-toggle:checked + .toggle-label::before {
+  transform: translateX(120%) translateY(-53%);
+}
+
+#billing-toggle {
+  display: none;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-block: 50px;
+}
+
+.pricing-card {
+  height: 350px;
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 20px;
+  padding: 30px;
+  border-radius: 5px;
+  background-color: var(--Card-bg-color);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+}
+.pricing-card:hover {
+  box-shadow: 0 10px 12px rgba(0, 0, 0, 0.2);
+}
+.card-category {
+  font-size: 1rem;
+  color: var(--Card-category-color);
+}
+.price {
+  font-size: var(--Font-size-300);
+  font-weight: 700;
+  color: var(--Price-color);
+}
+.services-details {
+  width: 100%;
+}
+.services-details li {
+  width: 100%;
+  text-align: center;
+  font-size: var(--Font-size-80);
+  font-weight: 700;
+  color: var(--Card-list-color);
+  padding-block: 10px;
+  border-bottom: 1px solid var(--Card-list-border-color);
+}
+.button {
+  width: 100%;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  background: var(--Button-bg-gradient);
+  border: none;
+  color: var(--white);
+  font-size: var(--Font-size-80);
+  font-weight: 700;
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+}
+
+.button:hover {
+  border: 1.5px solid var(--Button-border-color);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* special card design */
+.pricing-card.special{
+  height: 380px;
+  background-color: transparent;
+  background: var(--Card-bg-special-color);
+}
+
+.special .card-category{
+  color: var(--Card-category-special-color);
+}
+
+.special .price {
+  color: var(--Price-special-color);
+}
+.services-details li:first-child {
+  border-top: 1px solid var(--Card-list-border-color);
+}
+.special .services-details li {
+  color: var(--Card-list-special-color);
+  border-bottom: 1px solid var(--Card-list-border-special-color);
+}
+
+.special .services-details li:first-child {
+  border-top: 1px solid var(--Card-list-border-special-color);
+}
+
+
+.special .button {
+  border: 1.5px solid var(--Button-border-color);
+  background: none;
+  color: var(--Button-special-color);
+  background-color:white ;
+}
+
+.special .button:hover {
+  background: transparent;
+  color: var(--white);
+  -webkit-text-fill-color: initial;
+}
+
+
+@media(max-width: 900px){
+  body{
+    height: auto;
+  }
+  #page {
+  width: 100%;
+  height: 100%;
+}
+  .container{
+   gap: 20px;
+   flex-wrap: wrap;
+  padding-inline: 30px;
+}
+.pricing-card.special{
+  height: 350px;
+  background-color: transparent;
+  background: var(--Card-bg-special-color);
+}
+}
+
+@media(max-width: 650px){
+  .pricing-card {
+    height: 400px;
+    width: 100%;
+    max-width: 350px;
+  }
+}
